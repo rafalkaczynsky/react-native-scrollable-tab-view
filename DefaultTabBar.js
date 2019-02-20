@@ -44,6 +44,7 @@ const DefaultTabBar = createReactClass({
       style={{flex: 1, }}
       key={name}
       accessible={true}
+      disabled={this.props.locked}
       accessibilityLabel={name}
       accessibilityTraits='button'
       onPress={() => onPressHandler(page)}
@@ -114,3 +115,4 @@ const styles = StyleSheet.create({
 });
 
 module.exports = DefaultTabBar;
+
