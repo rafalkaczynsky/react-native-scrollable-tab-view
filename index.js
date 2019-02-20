@@ -282,6 +282,7 @@ const ScrollableTabView = createReactClass({
       activeTab: this.state.currentPage,
       scrollValue: this.state.scrollValue,
       containerWidth: this.state.containerWidth,
+      locked: this.props.locked
     };
 
     if (this.props.tabBarBackgroundColor) {
@@ -323,3 +324,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
