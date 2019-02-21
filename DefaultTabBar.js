@@ -10,6 +10,10 @@ const {
 } = ReactNative;
 const Button = require('./Button');
 
+import SimpleToast from 'react-native-simple-toast';
+import Toast from 'react-native-simple-toast';
+
+
 const DefaultTabBar = createReactClass({
   propTypes: {
     goToPage: PropTypes.func,
@@ -39,18 +43,22 @@ const DefaultTabBar = createReactClass({
     const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
     const fontWeight = isTabActive ? 'bold' : 'normal';
-
+    const locked = this.props.locked && !isTabActive;
     return <Button
       style={{flex: 1, }}
       key={name}
       accessible={true}
-      disabled={this.props.locked}
+      //disabled={this.props.locked}
       accessibilityLabel={name}
       accessibilityTraits='button'
-      onPress={() => onPressHandler(page)}
+      onPress={() => {
+        //TODO: translation
+       if (locked) return  Toast.show("This tab is disabled. Download tags to enable it.", SimpleToast.SHORT);
+       else return onPressHandler(page);
+      }}
     >
       <View style={[styles.tab, this.props.tabStyle, ]}>
-        <Text style={[{color: textColor, fontWeight, }, textStyle, ]}>
+        <Text style={[{color: locked ? 'lightgrey' : textColor, fontWeight, }, textStyle, ]}>
           {name}
         </Text>
       </View>
